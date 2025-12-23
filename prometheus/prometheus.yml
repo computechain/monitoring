@@ -1,0 +1,62 @@
+global:
+  scrape_interval: 15s # Scrape metrics every 15 seconds
+  evaluation_interval: 15s # Evaluate rules every 15 seconds
+  external_labels:
+    monitor: 'computechain-monitor'
+
+# Scrape configurations
+scrape_configs:
+  # ComputeChain Validator 1 (main)
+  - job_name: 'computechain-validator-1'
+    static_configs:
+      - targets: ['host.docker.internal:8000']
+        labels:
+          instance: 'validator-1'
+          validator: 'validator_1'
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # ComputeChain Validator 2 (DISABLED for single-validator monitoring)
+  # - job_name: 'computechain-validator-2'
+  #   static_configs:
+  #     - targets: ['host.docker.internal:8001']
+  #       labels:
+  #         instance: 'validator-2'
+  #         validator: 'validator_2'
+  #   metrics_path: '/metrics'
+  #   scrape_interval: 10s
+
+  # ComputeChain Validator 3 (DISABLED for single-validator monitoring)
+  # - job_name: 'computechain-validator-3'
+  #   static_configs:
+  #     - targets: ['host.docker.internal:8002']
+  #       labels:
+  #         instance: 'validator-3'
+  #         validator: 'validator_3'
+  #   metrics_path: '/metrics'
+  #   scrape_interval: 10s
+
+  # ComputeChain Validator 4 (DISABLED for single-validator monitoring)
+  # - job_name: 'computechain-validator-4'
+  #   static_configs:
+  #     - targets: ['host.docker.internal:8003']
+  #       labels:
+  #         instance: 'validator-4'
+  #         validator: 'validator_4'
+  #   metrics_path: '/metrics'
+  #   scrape_interval: 10s
+
+  # ComputeChain Validator 5 (DISABLED for single-validator monitoring)
+  # - job_name: 'computechain-validator-5'
+  #   static_configs:
+  #     - targets: ['host.docker.internal:8004']
+  #       labels:
+  #         instance: 'validator-5'
+  #         validator: 'validator_5'
+  #   metrics_path: '/metrics'
+  #   scrape_interval: 10s
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
