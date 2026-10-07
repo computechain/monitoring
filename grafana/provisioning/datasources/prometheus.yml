@@ -1,12 +1,12 @@
+# Reference configuration; runtime datasource is generated for the chosen ports.
 apiVersion: 1
-
 datasources:
   - name: Prometheus
     uid: ds_prom
     type: prometheus
     access: proxy
-    url: http://prometheus:9090
+    url: http://127.0.0.1:9090
     isDefault: true
-    editable: true
+    editable: false
     jsonData:
-      timeInterval: "10s"
+      timeInterval: "5s"

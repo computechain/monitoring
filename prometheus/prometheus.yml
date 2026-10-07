@@ -1,62 +1,23 @@
+# Reference for the default base port. stack.py generates active config for --dir.
 global:
-  scrape_interval: 15s # Scrape metrics every 15 seconds
-  evaluation_interval: 15s # Evaluate rules every 15 seconds
-  external_labels:
-    monitor: 'computechain-monitor'
-
-# Scrape configurations
+  scrape_interval: 5s
+  evaluation_interval: 5s
 scrape_configs:
-  # ComputeChain Validator 1 (main)
-  - job_name: 'computechain-validator-1'
+  - job_name: cometbft
     static_configs:
-      - targets: ['host.docker.internal:8000']
-        labels:
-          instance: 'validator-1'
-          validator: 'validator_1'
-    metrics_path: '/metrics'
-    scrape_interval: 10s
-
-  # ComputeChain Validator 2 (DISABLED for single-validator monitoring)
-  # - job_name: 'computechain-validator-2'
-  #   static_configs:
-  #     - targets: ['host.docker.internal:8001']
-  #       labels:
-  #         instance: 'validator-2'
-  #         validator: 'validator_2'
-  #   metrics_path: '/metrics'
-  #   scrape_interval: 10s
-
-  # ComputeChain Validator 3 (DISABLED for single-validator monitoring)
-  # - job_name: 'computechain-validator-3'
-  #   static_configs:
-  #     - targets: ['host.docker.internal:8002']
-  #       labels:
-  #         instance: 'validator-3'
-  #         validator: 'validator_3'
-  #   metrics_path: '/metrics'
-  #   scrape_interval: 10s
-
-  # ComputeChain Validator 4 (DISABLED for single-validator monitoring)
-  # - job_name: 'computechain-validator-4'
-  #   static_configs:
-  #     - targets: ['host.docker.internal:8003']
-  #       labels:
-  #         instance: 'validator-4'
-  #         validator: 'validator_4'
-  #   metrics_path: '/metrics'
-  #   scrape_interval: 10s
-
-  # ComputeChain Validator 5 (DISABLED for single-validator monitoring)
-  # - job_name: 'computechain-validator-5'
-  #   static_configs:
-  #     - targets: ['host.docker.internal:8004']
-  #       labels:
-  #         instance: 'validator-5'
-  #         validator: 'validator_5'
-  #   metrics_path: '/metrics'
-  #   scrape_interval: 10s
-
-  # Prometheus self-monitoring
-  - job_name: 'prometheus'
+      - targets: ['127.0.0.1:28603']
+        labels: {node: node0, role: validator}
+      - targets: ['127.0.0.1:28613']
+        labels: {node: node1, role: validator}
+      - targets: ['127.0.0.1:28623']
+        labels: {node: node2, role: validator}
+      - targets: ['127.0.0.1:28633']
+        labels: {node: node3, role: validator}
+      - targets: ['127.0.0.1:28643']
+        labels: {node: node4, role: full}
+  - job_name: cpc-application
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['127.0.0.1:28604']
+  - job_name: prometheus
+    static_configs:
+      - targets: ['127.0.0.1:9090']

@@ -1,902 +1,839 @@
 {
+  "uid": "computechain-v2",
+  "title": "ComputeChain v3 devnet",
+  "id": null,
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": true,
+  "refresh": "5s",
+  "timezone": "browser",
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "tags": [
+    "computechain",
+    "cometbft",
+    "devnet"
+  ],
   "annotations": {
     "list": []
   },
-  "editable": true,
-  "fiscalYearStartMonth": 0,
-  "graphTooltip": 1,
-  "id": null,
-  "links": [],
-  "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ds_prom"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        }
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 0,
-        "y": 0
-      },
       "id": 1,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_block_height",
-          "refId": "A"
-        }
-      ],
-      "title": "Block Height",
-      "type": "stat"
-    },
-    {
+      "title": "Узлы online",
+      "type": "stat",
       "datasource": {
         "type": "prometheus",
         "uid": "ds_prom"
       },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        }
-      },
       "gridPos": {
-        "h": 4,
+        "x": 0,
+        "y": 0,
         "w": 6,
-        "x": 6,
-        "y": 0
+        "h": 4
       },
-      "id": 2,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "10.0.0",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "sum(computechain_transactions_total) OR on() vector(0)",
-          "refId": "A"
+          "expr": "sum(cpc_node_up)",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
         }
       ],
-      "title": "Total Transactions",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ds_prom"
-      },
       "fieldConfig": {
         "defaults": {
+          "unit": "short",
           "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "blue",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 3000
-              },
-              {
-                "color": "red",
-                "value": 4500
-              }
-            ]
-          },
-          "unit": "short"
-        }
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 12,
-        "y": 0
-      },
-      "id": 3,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+            "mode": "palette-classic"
+          }
         },
-        "textMode": "auto"
+        "overrides": []
       },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_mempool_size",
-          "refId": "A"
-        }
-      ],
-      "title": "Mempool Size",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ds_prom"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        }
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 18,
-        "y": 0
-      },
-      "id": 4,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
           "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_validator_count_active OR on() vector(0)",
-          "refId": "A"
         }
-      ],
-      "title": "Active Validators",
-      "type": "stat"
+      }
     },
     {
+      "id": 2,
+      "title": "Финализированная высота",
+      "type": "stat",
       "datasource": {
         "type": "prometheus",
         "uid": "ds_prom"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        }
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 4
+        "x": 6,
+        "y": 0,
+        "w": 6,
+        "h": 4
       },
-      "id": 5,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "rate(computechain_blocks_total[1m]) * 60 OR on() vector(0)",
-          "legendFormat": "Blocks per minute",
-          "refId": "A"
+          "expr": "max(cpc_block_height)",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
         }
       ],
-      "title": "Block Production Rate",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ds_prom"
-      },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        }
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 4
-      },
-      "id": 6,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull",
-            "mean"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "sum(rate(computechain_transactions_total[1m])) OR on() vector(0)",
-          "legendFormat": "TPS",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "(rate(computechain_transactions_per_block_sum[5m]) / rate(computechain_transactions_per_block_count[5m])) OR on() vector(0)",
-          "legendFormat": "TX per block (avg)",
-          "refId": "B"
-        }
-      ],
-      "title": "Transaction Throughput",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ds_prom"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "short"
-        }
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 12
-      },
-      "id": 7,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_mempool_size",
-          "legendFormat": "Mempool size",
-          "refId": "A"
-        }
-      ],
-      "title": "Mempool Size Over Time",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ds_prom"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "max": 1,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "percentunit"
-        }
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 12
-      },
-      "id": 8,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull",
-            "mean"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_validator_uptime_score",
-          "legendFormat": "{{validator_address}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Validator Uptime Score",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ds_prom"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
           "unit": "short",
-          "decimals": 2
-        }
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
       },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 20
-      },
-      "id": 9,
       "options": {
-        "displayMode": "gradient",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
+        "colorMode": "value",
+        "graphMode": "none",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "",
           "values": false
-        },
-        "showUnfilled": true,
-        "text": {
-          "valueSize": 16
         }
-      },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_total_supply / 1e18",
-          "legendFormat": "Total Supply (CPC)",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_total_staked / 1e18",
-          "legendFormat": "Total Staked (CPC)",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_total_minted_total / 1e18",
-          "legendFormat": "Total Minted (CPC)",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_total_burned_total / 1e18",
-          "legendFormat": "Total Burned (CPC)",
-          "refId": "D"
-        }
-      ],
-      "title": "Token Economics",
-      "type": "bargauge"
+      }
     },
     {
+      "id": 3,
+      "title": "Разница высот узлов",
+      "type": "stat",
       "datasource": {
         "type": "prometheus",
         "uid": "ds_prom"
       },
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "expr": "max(cpc_block_height) - min(cpc_block_height)",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
+        }
+      ],
       "fieldConfig": {
         "defaults": {
+          "unit": "short",
           "color": {
             "mode": "palette-classic"
-          },
-          "custom": {
-            "hideFrom": {
-              "tooltip": false,
-              "viz": false,
-              "legend": false
-            }
-          },
-          "mappings": []
-        }
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 20
-      },
-      "id": 10,
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "values": [
-            "value"
-          ]
+          }
         },
-        "pieType": "pie",
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
+        "overrides": []
       },
-      "pluginVersion": "10.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_validator_power / 1e18",
-          "legendFormat": "{{validator_address}}",
-          "refId": "A"
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "values": false
         }
-      ],
-      "title": "Validator Voting Power Distribution (CPC)",
-      "type": "piechart"
+      }
     },
     {
+      "id": 4,
+      "title": "Mempool TX",
+      "type": "stat",
       "datasource": {
         "type": "prometheus",
         "uid": "ds_prom"
       },
+      "gridPos": {
+        "x": 18,
+        "y": 0,
+        "w": 6,
+        "h": 4
+      },
+      "targets": [
+        {
+          "expr": "max(cpc_mempool_transactions)",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
+        }
+      ],
       "fieldConfig": {
         "defaults": {
+          "unit": "short",
           "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
+            "mode": "palette-classic"
           }
+        },
+        "overrides": []
+      },
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "values": false
         }
+      }
+    },
+    {
+      "id": 5,
+      "title": "Высота блоков и приложения",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 4,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "cpc_block_height",
+          "refId": "A",
+          "legendFormat": "cpc_block_height {{node}} {{quantile}}"
+        },
+        {
+          "expr": "cpc_application_height",
+          "refId": "B",
+          "legendFormat": "cpc_application_height {{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "title": "Финализированный TPS (node0)",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 4,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "rate(cometbft_consensus_total_txs{node=\"node0\"}[1m])",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "title": "Нагрузка: подано / подтверждено TPS",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 12,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "sum(rate(cpc_load_submitted_total[1m]))",
+          "refId": "A",
+          "legendFormat": "submitted {{node}} {{quantile}}"
+        },
+        {
+          "expr": "sum(rate(cpc_load_confirmed_total[1m]))",
+          "refId": "B",
+          "legendFormat": "confirmed {{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "title": "Нагрузка: rejected / execution failed / RPC errors",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 12,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "sum(rate(cpc_load_checktx_rejected_total[1m]))",
+          "refId": "A",
+          "legendFormat": "checktx rejected {{node}} {{quantile}}"
+        },
+        {
+          "expr": "sum(rate(cpc_load_execution_failed_total[1m]))",
+          "refId": "B",
+          "legendFormat": "execution failed {{node}} {{quantile}}"
+        },
+        {
+          "expr": "sum(rate(cpc_load_broadcast_errors_total[1m]))",
+          "refId": "C",
+          "legendFormat": "RPC errors {{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "title": "Задержка подтверждения: p50 / p95 / p99",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 20,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "cpc_load_confirmation_latency_seconds",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "title": "Mempool по узлам",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 20,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "cpc_mempool_transactions",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 11,
+      "title": "Блоков в секунду",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 28,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "rate(cometbft_consensus_block_interval_seconds_count{node=\"node0\"}[1m])",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "title": "Comet peers",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 28,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "cometbft_p2p_peers",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 13,
+      "title": "Supply / burned CPC",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 36,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "cpc_supply_cpc",
+          "refId": "A",
+          "legendFormat": "cpc_supply_cpc {{node}} {{quantile}}"
+        },
+        {
+          "expr": "cpc_burned_cpc",
+          "refId": "B",
+          "legendFormat": "cpc_burned_cpc {{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 14,
+      "title": "Давность последнего блока",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 36,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "time() - cpc_last_block_timestamp_seconds",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 15,
+      "title": "RPC / application availability",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 44,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "cpc_node_up",
+          "refId": "A",
+          "legendFormat": "cpc_node_up {{node}} {{quantile}}"
+        },
+        {
+          "expr": "cpc_application_up",
+          "refId": "B",
+          "legendFormat": "cpc_application_up {{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 16,
+      "title": "Не подтверждено в текущей нагрузке",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 44,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "expr": "cpc_load_unresolved",
+          "refId": "A",
+          "legendFormat": "{{node}} {{quantile}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 17,
+      "title": "Native voting power",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
       },
       "gridPos": {
         "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 20
+        "w": 12,
+        "x": 0,
+        "y": 52
       },
-      "id": 11,
-      "options": {
-        "showHeader": true,
-        "cellHeight": "sm",
-        "footer": {
-          "show": false,
-          "reducer": [
-            "sum"
-          ],
-          "countRows": false,
-          "fields": ""
-        }
-      },
-      "pluginVersion": "10.0.0",
       "targets": [
         {
+          "refId": "A",
+          "expr": "cpc_node_voting_power",
+          "legendFormat": "{{node}}",
           "datasource": {
             "type": "prometheus",
             "uid": "ds_prom"
-          },
-          "expr": "computechain_validator_performance_score",
-          "format": "table",
-          "instant": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_validator_uptime_score",
-          "format": "table",
-          "instant": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ds_prom"
-          },
-          "expr": "computechain_validator_power / 1e18",
-          "format": "table",
-          "instant": true,
-          "refId": "C"
-        }
-      ],
-      "title": "Validator Performance",
-      "transformations": [
-        {
-          "id": "merge",
-          "options": {}
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "__name__": true,
-              "instance": true,
-              "job": true
-            },
-            "indexByName": {
-              "validator_address": 0,
-              "Value #A": 1,
-              "Value #B": 2,
-              "Value #C": 3
-            },
-            "renameByName": {
-              "Value #A": "Performance",
-              "Value #B": "Uptime",
-              "Value #C": "Power (CPC)",
-              "validator_address": "Validator"
-            }
           }
         }
       ],
-      "type": "table"
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 18,
+      "title": "Bonded / unbonding CPC",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 52
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "cpc_bonded_cpc",
+          "legendFormat": "{{node}}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ds_prom"
+          }
+        },
+        {
+          "refId": "B",
+          "expr": "cpc_unbonding_cpc",
+          "legendFormat": "{{node}} unbonding",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ds_prom"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 19,
+      "title": "Scheduled validator count",
+      "type": "timeseries",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "ds_prom"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 52
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "cpc_scheduled_validators",
+          "legendFormat": "{{node}}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "ds_prom"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
     }
-  ],
-  "refresh": "10s",
-  "schemaVersion": 38,
-  "style": "dark",
-  "tags": [
-    "computechain",
-    "blockchain"
-  ],
-  "templating": {
-    "list": []
-  },
-  "time": {
-    "from": "now-1h",
-    "to": "now"
-  },
-  "timepicker": {},
-  "timezone": "",
-  "title": "ComputeChain - 24h Test Dashboard",
-  "uid": "computechain-main",
-  "version": 1,
-  "weekStart": ""
+  ]
 }
