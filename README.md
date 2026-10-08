@@ -1,9 +1,55 @@
 # ComputeChain v3 monitoring
 
-Prometheus + Grafana для текущего CometBFT devnet. Старые FastAPI endpoints
+Prometheus + Grafana для CometBFT devnet. Старые FastAPI endpoints
 на 8000–8004 и legacy performance/PoC-метрики не используются.
 
-## Быстрый запуск на этом хосте
+## Текущий стенд: multisite WAN fleet
+
+Grafana сейчас показывает **cpc-multisite-devnet-1**: четыре валидатора и три full
+nodes в трёх локациях. Открыть [WAN dashboard](http://192.168.0.100:3000/d/computechain-fleet).
+Адрес, login `admin`, прежний пароль и Grafana/Prometheus volumes сохранены.
+Каталог `.runtime/comet-staking-devnet/monitoring/` сохранён только ради существующих
+volumes/учётной записи; это НЕ означает, что Grafana продолжает наблюдать старую сеть.
+Explorer/website тоже показывают WAN chain через отдельный full-a1 observer;
+прежний индекс локальной цепочки сохранён отдельно.
+
+- Все семь источников: node ID/chain ID/genesis, доступность, высота, catch-up,
+  block age, native power; сравнение общего block/AppHash. Без независимого light proof.
+- Пять локальных узлов: native Comet metrics, mempool и read-only ABCI state.
+  Два удалённых: существующие pinned TLS readers27626/27636, только read allowlist.
+  Удалённые CPU/RAM, mempool, peers и ABCI не показываются как измеренные.
+- TPS берётся с validator-a1; supply/stake с full-a1. Реплики не суммируются.
+  Locations/machines — объявленные failure domains, НЕ доказательство независимости.
+- Шесть Prometheus alert rules: node unavailable, stalled finality, height lag,
+  common block conflict, missing witnesses, stale collector. Видны в dashboard и
+  [Prometheus alerts](http://192.168.0.100:9090/alerts); Telegram/email не подключены.
+
+Управление с корня workspace, БЕЗ рестарта chain:
+
+```bash
+.tools/blockchain-venv/bin/python monitoring/stack.py up --dir .runtime/comet-staking-devnet
+.tools/blockchain-venv/bin/python monitoring/stack.py status --dir .runtime/comet-staking-devnet
+systemctl status cpc-fleet-observer.service
+```
+
+Loopback observer27674 poll15s,4workers, CPU10% одного core/MemoryMax96MiB; locked
+cpm-fleet sees only public config/CA/genesis/runtime, no keys/node DBs. Никаких SSH
+паролей/ключей или remote host changes. Native local scrape5s, fleet scrape15s.
+Loopback — граница хоста, не изоляция от других локальных процессов; allowlist
+сборщика не заменяет production process-to-process RPC authentication.
+Сохраняемый fleet-selection.json с SHA предотвращает возврат к старой цепочке
+при `start_test.sh monitoring-up`. Old-chain dashboard отдельно помечен historical.
+Существующий `cleanup.sh` может остановить общий monitoring Compose, но не новую цепь.
+
+Public config: `/root/computechain-node/fleet-monitoring/fleet.json`; trust/leaf
+pins из утверждённого bootstrap profile. CA/leaf rotation пока ручная; после
+истечения сертификата remote up=0, а не last-good success. История индексов, wallets
+и validator keys не читаются. Evidence: `.runtime/multisite-live/monitoring/verification.json`.
+Новый observer устанавливается явно `install_fleet.py --root HOME/computechain-node
+--config APPROVED_PUBLIC_JSON --config-sha256 APPROVED_SHA --port FREE_LOOPBACK_PORT`;
+повторная установка/upgrade требует отдельной проверки, не overwrite live services.
+
+## Отдельный исторический локальный devnet (reference)
 
 Из `/root/computechain/computechain`:
 

@@ -10,6 +10,7 @@ services:
       - --web.listen-address=${MONITORING_HOST:?Run stack.py}:${PROMETHEUS_PORT:-9090}
     volumes:
       - ${MONITORING_RUNTIME:?Run stack.py or start_test.sh}/prometheus.json:/etc/prometheus/prometheus.yml:ro
+      - ${MONITORING_RUNTIME}/fleet-alerts.json:/etc/prometheus/fleet-alerts.json:ro
       - prometheus_data:/prometheus
     restart: unless-stopped
     healthcheck:
@@ -34,11 +35,12 @@ services:
       GF_AUTH_ANONYMOUS_ENABLED: "false"
       GF_ANALYTICS_REPORTING_ENABLED: "false"
       GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: ${GRAFANA_HOME_DASHBOARD:-/var/lib/grafana/dashboards/computechain.json}
     volumes:
       - grafana_data:/var/lib/grafana
       - ${MONITORING_RUNTIME}/datasources:/etc/grafana/provisioning/datasources:ro
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
-      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - ${GRAFANA_DASHBOARDS:-./grafana/dashboards}:/var/lib/grafana/dashboards:ro
     depends_on:
       prometheus:
         condition: service_healthy
